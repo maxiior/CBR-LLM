@@ -10,7 +10,7 @@
 
 
 ## Custom
-data*
+dataset*
 model*.pth
 runs
 
