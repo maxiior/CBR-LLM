@@ -24,9 +24,9 @@
     "mask_tag": "<MASK>",
     "proportions": {
       "train": 0.3,
-      "valid": 0.1,
-      "test": 0.1,
-      "langchain": 0.5
+      "valid": 0.05,
+      "test": 0.35,
+      "langchain": 0.3
     }
   }
 }

@@ -1,6 +1,7 @@
 from .interfaces import Dataset
 import numpy as np
 from ast import literal_eval
+import re
 
 class DataCreator(Dataset):
     def __init__(self, experiment_configs):
@@ -53,6 +54,15 @@ class DataCreator(Dataset):
             if len(step) <= 3:
                 return False
         return True
+    
+    def _validate_words_number_in_row(self, name, steps, ingredients):
+        pattern = re.compile('[a-zA-Z\s]+')
+        text = pattern.findall(f"{name} {steps} {ingredients}")
+
+        if len(" ".join(text).split()) <= 200:
+            return True
+        else:
+            return False
 
     def _preprocessing_dataframe(self, df):
         df = df.dropna()
@@ -64,6 +74,8 @@ class DataCreator(Dataset):
         df = df[np.vectorize(self._validate_symbols())(df.name)]
         df = df[np.vectorize(self._validate_symbols())(df.steps)]
         df = df[np.vectorize(self._validate_symbols())(df.ingredients)]
+
+        df = df[np.vectorize(self._validate_words_number_in_row)(df.name, df.steps, df.ingredients)]
         
         df = df[np.vectorize(self._validate_sentence_length)(df.steps)]
 

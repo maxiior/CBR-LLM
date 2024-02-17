@@ -28,8 +28,13 @@ class Dataset(abc.ABC):
             rows = int(v * len(dataset))
             datasets[k] = dataset.iloc[current_row:current_row+rows]
             current_row += rows
-        
+
+        self._save_datasets(datasets)
         return datasets
+    
+    def _save_datasets(self, datasets):
+        for k, v in datasets.items():
+            v.to_csv(f"../dataset/{k}.csv", index=False)
     
     def prepare_masked_dataset(self, df):
         original_df = df.copy
