@@ -21,11 +21,15 @@ class Workflow():
 
         for configs in self.experiments_configs:
             dc = DataCreator(experiment_configs=configs)
-            dataset = dc.create_structured_datasets()
+            datasets = dc.create_structured_datasets()
 
             if mode == "auto":
-                masked_dataset, original_dataset = dc.prepare_masked_dataset(dataset['train'])
+                masked_dataset, original_dataset = dc.prepare_masked_dataset(datasets['train'])
                 
+                for idx, row in masked_dataset.iterrows():
+
+                
+
                 
             elif mode == "manual":
                 user_inputs = self._get_user_inputs()

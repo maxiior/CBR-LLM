@@ -13,7 +13,7 @@ class GPTConnector(Model):
         self.model_configs = experiment_configs.model
         self.client = OpenAI(api_key=api_key)
       
-    def send_prompt(self, prompt):
+    def send_request(self, prompt):
         response = self.client.chat.completions.create(
             model=self.model_configs.name,
             prompt=prompt,
