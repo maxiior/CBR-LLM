@@ -1,16 +1,6 @@
 {
-    "workflow": {
-        "mode": "auto"
-    },
-    "request_body": {
-        "response_format": "json",
-        "temperature": 0,
-        "prompt_tags": ["<NAME>", "<STEPS>", "<INGREDIENTS>"]
-    },
-    "datasets": {
-        "train": 0.25,
-        "valid": 0.25,
-        "test": 0.25,
-        "langchain": 0.25
-    }
+  "workflow": {
+    "mode": "auto"
+  },
+  "experiments": ["auto_1.json"]
 }
