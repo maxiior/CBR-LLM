@@ -12,7 +12,9 @@
 ## Custom
 dataset*
 model*.pth
+**/models/model*
 runs
+
 
 ## PyTorch
 
