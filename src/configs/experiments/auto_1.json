@@ -1,7 +1,14 @@
 {
   "prompt": {
-    "file_name": "prompt_1",
-    "tags": ["<NAME>", "<STEPS>", "<INGREDIENTS>"]
+    "name": "prompt_1",
+    "tags": [
+      {"column": "name", "key": "name", "value": "<NAME>", "source": "dataset"},
+      {"column": "ingredients", "key": "ingredients", "value": "<INGREDIENTS>", "source": "dataset"},
+      {"column": "steps", "key": "preparation", "value": "<STEPS>", "source": "dataset"},
+      {"value": "<EXAMPLES>", "source": "langchain"}
+    ],
+    "number_of_most_common": 5,
+    "response_structure": "name: <NAME> ; ingredients: <INGREDIENTS> ; preparation: <STEPS>"
   },
   "model": {
     "type": "gpt",
@@ -21,12 +28,25 @@
       "ingredients",
       "n_ingredients"
     ],
+    "columns_to_mask": [
+      "name",
+      "steps",
+      "ingredients"
+    ],
     "mask_tag": "<MASK>",
     "proportions": {
       "train": 0.3,
       "valid": 0.05,
       "test": 0.35,
       "langchain": 0.3
-    }
+    },
+    "target_files_prefix": "auto_1"
+  },
+  "validation": {
+    "bleu_threshold": 0,
+    "meteor_threshold": 0,
+    "cosine_distance_threshold": 0,
+    "spice_threshold": 0,
+    "cider_threshold": 0
   }
 }
