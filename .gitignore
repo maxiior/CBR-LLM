@@ -12,7 +12,7 @@
 ## Custom
 dataset*
 model*.pth
-**/models/model*
+**/models/*
 runs
 
 
