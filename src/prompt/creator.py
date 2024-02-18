@@ -1,4 +1,4 @@
-from ..langchain import LangChainConnector
+from langchain import LangChainConnector
 import json
 
 class PromptCreator():

@@ -1,6 +1,6 @@
 from openai import OpenAI
 from dotenv import load_dotenv
-from interfaces import Model
+from .interfaces import Model
 import os
 
 
