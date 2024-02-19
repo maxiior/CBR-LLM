@@ -1,4 +1,5 @@
-from models import GPTConnector
+from .gpt import GPTConnector
+from .llama import LlamaCPP
 
 class ModelManager():
     def __init__(self, experiment_configs):
@@ -9,7 +10,7 @@ class ModelManager():
         if model_type == 'gpt':
             return GPTConnector(self.model_configs)
         elif model_type == 'llama':
-            pass
+            return LlamaCPP()
         elif model_type == 'bart':
             pass
         else:

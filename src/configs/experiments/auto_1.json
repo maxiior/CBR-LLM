@@ -46,13 +46,13 @@
     "columns_to_mask": ["name", "steps", "ingredients"],
     "mask_tag": "<MASK>",
     "proportions": {
-      "cbr_database": 0.188,
-      "cbr_augmentation": 0.188,
-      "additional_cbr_1": 0.094,
-      "additional_cbr_2": 0.094,
-      "validation": 0.037,
-      "additional_validation": 0.056,
-      "model_training": 0.188
+      "cbr_database": 0.2,
+      "cbr_augmentation": 0.2,
+      "additional_cbr_1": 0.1,
+      "additional_cbr_2": 0.1,
+      "validation": 0.04,
+      "additional_validation": 0.06,
+      "model_training": 0.2
     },
     "target_files_prefix": ""
   },

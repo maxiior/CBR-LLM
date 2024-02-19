@@ -24,16 +24,16 @@ class Workflow():
             validation = Validation(experiment_configs=configs)
 
             datasets = data_creator.create_structured_datasets()
-            # model = model_manager.get_model()
+            model = model_manager.get_model()
 
-            # if mode == "auto":
-            #     masked_dataset, original_dataset = data_creator.prepare_masked_dataset(datasets['train'])
+            if mode == "auto":
+                masked_dataset, original_dataset = data_creator.prepare_masked_dataset(datasets['train'])
                 
-            #     for idx, row in masked_dataset.iterrows():
-            #         prompt = prompt_creator.create_prompt(row)
-            #         response = model.send_request(prompt)
+                for idx, row in masked_dataset.iterrows():
+                    prompt = prompt_creator.create_prompt(row)
+                    response = model.send_request(prompt)
 
-            #         result = validation.validate(original_dataset.iloc[idx], response)
+                    result = validation.validate(original_dataset.iloc[idx], response)
 
             #         if result:
             #             #add to langchain
