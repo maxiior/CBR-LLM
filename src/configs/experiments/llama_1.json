@@ -40,8 +40,8 @@
       "ingredients",
       "n_ingredients"
     ],
-    "columns_to_mask": ["name", "steps", "ingredients"],
-    "mask_tag": "<MASK>",
+    "columns_to_mask": ["steps"],
+    "mask_tag": "",
     "proportions": {
       "cbr_database": 0.188,
       "cbr_augmentation": 0.188,

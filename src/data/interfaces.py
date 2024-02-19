@@ -7,6 +7,7 @@ import os
 class Dataset(abc.ABC):
     def __init__(self, experiment_configs):
         self.datasets_configs = experiment_configs.datasets
+        self.model_configs = experiment_configs.model
 
     @abc.abstractmethod
     def _preprocessing_dataframe(self, df):
@@ -58,6 +59,15 @@ class Dataset(abc.ABC):
     
     def prepare_masked_dataset(self, df):
         original_df = df.copy
-        for i in range(len(df)):
-            df.at[i, random.choice(self.datasets_configs.columns_to_mask)] = self.datasets_configs.mask_tag
+
+        if self.model_configs.type == 'gpt':
+            for i in range(len(df)):
+                df.at[i, random.choice(self.datasets_configs.columns_to_mask)] = self.datasets_configs.mask_tag
+            
+        elif self.model_configs == 'llama':
+            columns_to_mask = self.datasets_configs.columns_to_mask
+            if len(columns_to_mask) == 1:
+                for i in range(len(df)):
+                    df.at[i, columns_to_mask[0]] = self.datasets_configs.mask_tag
+        
         return df, original_df
