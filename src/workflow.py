@@ -24,7 +24,7 @@ class Workflow():
             validation = Validation(experiment_configs=configs)
 
             datasets = data_creator.create_structured_datasets()
-            model = model_manager.get_model()
+            # model = model_manager.get_model()
 
             # if mode == "auto":
             #     masked_dataset, original_dataset = data_creator.prepare_masked_dataset(datasets['train'])
