@@ -1,0 +1,8 @@
+{
+    "dataset_name": "cbr_augmentation_2_input_continue.csv",
+    "model": "LLama-13b-hf-q8_0",
+    "model_path": "llama_models/llama-13b-hf_q8_0.gguf",
+    "n_gpu_layers": 41,
+    "n_batch": 1024,
+    "n_ctx": 2048
+}
