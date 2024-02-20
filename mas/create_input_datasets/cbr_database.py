@@ -22,6 +22,7 @@ class CBRDatabase:
         self.db.add_texts(texts, metadatas)
 
     def similarity_search(self, **kwargs):
+        """query=query, k=4, filter={'test':True}"""
         res = self.db.similarity_search(**kwargs)
         return res
 

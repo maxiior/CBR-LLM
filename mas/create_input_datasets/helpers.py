@@ -8,6 +8,10 @@ def compose(factual:pd.DataFrame, masked:"pd.Row") -> str:
     comp = comp + [f"name: {masked['name']} ; ingredients: {masked['ingredients']} ; preparation:"]
     return " ; ".join(comp)
 
+def str_rep_no_steps(df_recipes) -> str:
+    comp = f"name: {df_recipes['name']} ; ingredients: {df_recipes['ingredients']} ; preparation:"
+    return comp
+
 def str_rep(df_recipes) -> str:
     comp = [f"name: {e['name']} ; ingredients: {e['ingredients']} ; preparation:{e['steps']}" for i, e in df_recipes.iterrows()]
     return comp

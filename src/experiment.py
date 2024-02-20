@@ -40,17 +40,18 @@ def run(model, dataset_name, experiment_name):
     if os.path.isfile(file_name): raise Exception('experiment already exists.')
 
     for idx, row in dataset.iterrows():
-        try:
-            id = row['target_recipe']
-            response = model.send_request(row['input'])
-            
-            responses.loc[len(responses)] = [response, id]
+        # try:
+        id = row['target_recipe']
+        response = model.send_request(row['input'])
+        
+        responses.loc[len(responses)] = [response, id]
 
-            if idx % 20 == 0:
-                log.add_results_to_df(experiment_name, responses)
-                responses = pd.DataFrame(columns=['response', 'target_recipe'])
-        except:
-            pass
+        if idx % 20 == 0:
+            log.add_results_to_df(experiment_name, responses)
+            responses = pd.DataFrame(columns=['response', 'target_recipe'])
+        # except Exception as e:
+        #     print(e)
+        #     pass
 
     end_time = time.time()
     
@@ -59,10 +60,3 @@ def run(model, dataset_name, experiment_name):
 
 
 
-# from .models import LlamaCPP
-
-
-
-llama = LlamaCPPMock()
-
-run(model=llama, dataset_name='small_validation_pe_input.csv', experiment_name='small_validation_pe')
