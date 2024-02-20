@@ -12,8 +12,8 @@
 ## Custom
 dataset*
 model*.pth
-**/models/*
 runs
+**.gguf
 
 
 ## PyTorch
