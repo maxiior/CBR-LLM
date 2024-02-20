@@ -1,33 +1,17 @@
 {
+  "experiment": {
+    "name": "small_validation_pe"
+  },
   "prompt": {
-    "name": "prompt_1",
-    "tags": [
-      {
-        "column": "name",
-        "key": "name",
-        "value": "<NAME>",
-        "source": "dataset"
-      },
-      {
-        "column": "ingredients",
-        "key": "ingredients",
-        "value": "<INGREDIENTS>",
-        "source": "dataset"
-      },
-      {
-        "column": "steps",
-        "key": "preparation",
-        "value": "<STEPS>",
-        "source": "dataset"
-      },
-      { "value": "<EXAMPLES>", "source": "langchain" }
-    ],
-    "number_of_most_common": 5,
-    "response_structure": "name: <NAME> ; ingredients: <INGREDIENTS> ; preparation: <STEPS>"
+    "number_of_examples": 7,
+    "random": true
   },
   "model": {
-    "type": "llama",
-    "name": "",
+    "name": "llama",
+    "path": "models/llama-13b-hf_q8_0.gguf",
+    "n_gpu_layers": 41,
+    "n_batch": 1024,
+    "n_ctx": 2048,
     "params": {}
   },
   "datasets": {
@@ -41,7 +25,7 @@
       "n_ingredients"
     ],
     "columns_to_mask": ["steps"],
-    "mask_tag": "",
+    "mask_tag": "<MASK>",
     "proportions": {
       "cbr_database": 0.188,
       "cbr_augmentation": 0.188,
@@ -50,8 +34,7 @@
       "validation": 0.037,
       "additional_validation": 0.056,
       "model_training": 0.188
-    },
-    "target_files_prefix": ""
+    }
   },
   "validation": {
     "bleu_2_threshold": 0.1,
@@ -59,5 +42,6 @@
     "bleu_4_threshold": 0.001,
     "meteor_threshold": 0.174,
     "cosine_similarity_threshold": 0.535
-  }
+  },
+  "save_files_prefix": "llama"
 }

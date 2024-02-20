@@ -10,7 +10,7 @@ class Logger():
     def add_results_to_df(self, prefix, df):
         file_name = f'./logs/{prefix}_results.csv'
         if not os.path.isfile(file_name):
-            pd.DataFrame(columns=['response', 'target_recipe']).to_csv(file_name)
+            pd.DataFrame(columns=['target_recipe', 'response']).to_csv(file_name)
         df.to_csv(file_name, mode='a', index=False, header=False)
     
     def save_json(self, prefix, dataset_name, model_info):

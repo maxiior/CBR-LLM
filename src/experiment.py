@@ -52,6 +52,7 @@ def run(model, dataset_name, experiment_name):
         except:
             pass
 
+    log.add_results_to_df(experiment_name, responses)
     end_time = time.time()
     
     log.modify_json(experiment_name, 'time', end_time-start_time)

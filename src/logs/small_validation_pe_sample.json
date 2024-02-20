@@ -1,0 +1,8 @@
+{
+    "dataset_name": "small_validation_pe",
+    "model": "LLama-13b-hf-q8_0",
+    "model_path": "models/llama-13b-hf_q8_0.gguf",
+    "n_gpu_layers": 41,
+    "n_batch": 1024,
+    "n_ctx": 2048
+}

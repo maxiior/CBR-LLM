@@ -2,12 +2,14 @@ import pandas as pd
 import abc
 import random
 import os
+from copy import deepcopy
 
 
 class Dataset(abc.ABC):
     def __init__(self, experiment_configs):
         self.datasets_configs = experiment_configs.datasets
         self.model_configs = experiment_configs.model
+        self.save_files_prefix = experiment_configs.save_files_prefix
 
     @abc.abstractmethod
     def _preprocessing_dataframe(self, df):
@@ -22,7 +24,7 @@ class Dataset(abc.ABC):
 
     def _check_if_files_exists(self):
         keys = self.datasets_configs.proportions.keys()
-        prefix = self.datasets_configs.target_files_prefix
+        prefix = self.save_files_prefix
         number_of_files = 0
 
         for i in keys:
@@ -33,10 +35,11 @@ class Dataset(abc.ABC):
 
     def create_structured_datasets(self):
         if self._check_if_files_exists():
+            print('INFO - datasets for this experiment already exists.')
             keys = self.datasets_configs.proportions.keys()
             datasets = {}
             for i in keys:
-                datasets[i] = pd.read_csv(f"../dataset/{self.datasets_configs.target_files_prefix}_{i}.csv")
+                datasets[i] = pd.read_csv(f"../dataset/{self.save_files_prefix}_{i}.csv")
             return datasets
         else:
             dataset = self._load_dataset()
@@ -55,19 +58,13 @@ class Dataset(abc.ABC):
     
     def _save_datasets(self, datasets):
         for k, v in datasets.items():
-            v.to_csv(f"../dataset/{self.datasets_configs.target_files_prefix}_{k}.csv", index=False)
+            v.to_csv(f"../dataset/{self.save_files_prefix}_{k}.csv", index=False)
     
     def prepare_masked_dataset(self, df):
-        original_df = df.copy
+        original_df = deepcopy(df)
 
-        if self.model_configs.type == 'gpt':
-            for i in range(len(df)):
-                df.at[i, random.choice(self.datasets_configs.columns_to_mask)] = self.datasets_configs.mask_tag
-            
-        elif self.model_configs == 'llama':
-            columns_to_mask = self.datasets_configs.columns_to_mask
-            if len(columns_to_mask) == 1:
-                for i in range(len(df)):
-                    df.at[i, columns_to_mask[0]] = self.datasets_configs.mask_tag
+        for i in range(len(df)):
+            df.at[i, random.choice(self.datasets_configs.columns_to_mask)] = self.datasets_configs.mask_tag
         
+        print('INFO - dataset has been masked.')
         return df, original_df

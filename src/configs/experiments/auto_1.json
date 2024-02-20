@@ -26,8 +26,8 @@
     "response_structure": "name: <NAME> ; ingredients: <INGREDIENTS> ; preparation: <STEPS>"
   },
   "model": {
-    "type": "gpt",
-    "name": "gpt-3.5-turbo-instruct",
+    "name": "gpt",
+    "path": "gpt-3.5-turbo-instruct",
     "params": {
       "temperature": 0,
       "response_format": "json"

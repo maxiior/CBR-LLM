@@ -2,6 +2,7 @@ from nltk.translate.bleu_score import sentence_bleu
 from nltk.translate.meteor_score import meteor_score
 from langchain_community.embeddings import GPT4AllEmbeddings
 from sklearn.metrics.pairwise import cosine_similarity
+import pandas as pd
 
 
 class Validation():
@@ -27,23 +28,20 @@ class Validation():
     def _meteor(self, original:str, generated:str) -> float:
         return round(meteor_score([original.split()], generated.split()), 6)
 
-    def _prepare_original(self, original):
-        response_structure = self.prompt_configs.response_structure
-        for i in self.prompt_configs.tags:
-            if i.source == 'dataset':
-                response_structure = response_structure.replace(i.value, original[i.column])
-        return response_structure
-
-    def validate(self, original, generated:str):
-        original = self._prepare_original(original)
+    def validate(self, original, experiment_name):
+        generated = pd.read_csv(f'./logs/{experiment_name}_results.csv')['response'].to_lsit()
+        original_steps = original['steps'].to_list()
         
-        if (
-            self._bleu(original, generated, version=4) >= self.validation_configs.bleu_4_threshold and 
-            self._bleu(original, generated, version=3) >= self.validation_configs.bleu_3_threshold and 
-            self._bleu(original, generated, version=2) >= self.validation_configs.bleu_2_threshold and
-            self._meteor(original, generated) >= self.validation_configs.meteor_threshold and
-            self._cosine_similarity(original, generated) >= self.validation_configs.cosine_similarity_threshold
-        ):
-            return True
-        else:
-            return False
+        x = 0
+
+        for i, j in zip(original_steps, generated):
+            if (
+                self._bleu(i, j, version=4) >= self.validation_configs.bleu_4_threshold and 
+                self._bleu(i, j, version=3) >= self.validation_configs.bleu_3_threshold and 
+                self._bleu(i, j, version=2) >= self.validation_configs.bleu_2_threshold and
+                self._meteor(i, j) >= self.validation_configs.meteor_threshold and
+                self._cosine_similarity(i, j) >= self.validation_configs.cosine_similarity_threshold
+            ):
+                x += 1
+        
+        return x, len(original_steps)

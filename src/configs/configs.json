@@ -2,5 +2,5 @@
   "workflow": {
     "mode": "auto"
   },
-  "experiments": ["auto_1.json"]
+  "experiments": ["llama_1.json"]
 }

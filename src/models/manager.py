@@ -6,12 +6,12 @@ class ModelManager():
         self.model_configs = experiment_configs.model
     
     def get_model(self):
-        model_type = self.model_configs.type
-        if model_type == 'gpt':
+        model_name = self.model_configs.name
+        if model_name == 'gpt':
             return GPTConnector(self.model_configs)
-        elif model_type == 'llama':
-            return LlamaCPP()
-        elif model_type == 'bart':
+        elif model_name == 'llama':
+            return LlamaCPP(self.model_configs)
+        elif model_name == 'bart':
             pass
         else:
-            raise ValueError(f'{model_type} mode does not exists.')
+            raise ValueError(f'{model_name} mode does not exists.')
