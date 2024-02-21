@@ -1,9 +1,13 @@
 
 import pandas as pd
+import numpy as np
 from langchain_community.vectorstores import Chroma
 from langchain_community.embeddings import GPT4AllEmbeddings
 import os
 
+
+def validate_datestet(df1:pd.DataFrame, df2:pd.DataFrame):
+    return np.all(df1.target_recipe.values == df2.target_recipe.values)
 
 def compose(factual:pd.DataFrame, masked:"pd.Row") -> str:
     comp = [f"name: {e['name']} ; ingredients: {e['ingredients']} ; preparation:{e['steps']}" for i, e in factual.iterrows()]
