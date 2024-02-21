@@ -29,7 +29,7 @@ class Validation():
         return round(meteor_score([original.split()], generated.split()), 6)
 
     def validate(self, original, experiment_name):
-        generated = pd.read_csv(f'./logs/{experiment_name}_results.csv')['response'].to_lsit()
+        generated = pd.read_csv(f'./logs/{experiment_name}_results.csv')['response'].to_list()
         original_steps = original['steps'].to_list()
         
         x = 0
