@@ -23,7 +23,7 @@ class LlamaCPP(Model):
     def send_request(self, X, break_word:str = " name:") -> str:
         tok_len = self.model.get_num_tokens(X)
         # print(tok_len)
-        if tok_len > 1500:
+        if tok_len > 1550:
             raise Exception(f"Request exceeds prefelable 1500 tokens. Has: {tok_len}")
         prev = ""
         res = ""
