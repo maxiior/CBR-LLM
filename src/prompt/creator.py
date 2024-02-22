@@ -1,4 +1,3 @@
-from langchain import LangChainConnector
 import json
 import numpy as np
 import pandas as pd
@@ -9,7 +8,6 @@ class PromptCreator():
         self.prompt_configs = experiment_configs.prompt
         self.model_configs = experiment_configs.model
         self.save_files_prefix = experiment_configs.save_files_prefix
-        self.langchain_connector = LangChainConnector(self.prompt_configs)
 
     def _get_prompt(self, prompt_name: str):
         prompts = {}
@@ -35,7 +33,7 @@ class PromptCreator():
 
         return prompt
     
-    def prepare_prompts(self, masked_dataset, original_dataset, file_name):
+    def prepare_prompts(self, masked_dataset, original_dataset, file_name, casebase):
         number_of_examples = self.prompt_configs.number_of_examples
         random = self.prompt_configs.random
 
@@ -50,8 +48,11 @@ class PromptCreator():
 
             for idx, i in enumerate(masked_dataset.to_numpy()):
                 if not random:
-                    original = f"name: {original_dataset[idx][1]} ; ingredients: {original_dataset[idx][3]} ; preparation: {original_dataset[idx][2]}"
-                    examples = self.langchain_connector.get_most_common_rows(original, number_of_examples=number_of_examples)
+                    original = f"name: {original_dataset[idx][1]} ; ingredients: {original_dataset[idx][3]}"
+
+                    examples = casebase.similarity_search(query=original, k=number_of_examples)
+
+                    prepared_examples = " ; ".join([i.page_content for i in examples])
                 else:
                     examples = np.random.choice(original_dataset.shape[0], size=number_of_examples)
                     examples = original_dataset[examples, :]

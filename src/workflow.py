@@ -4,6 +4,7 @@ from data import DataCreator
 from models import ModelManager
 from validation import Validation
 from experiments import Experiment
+from casebase import CBRDatabase
 
 class LlamaCPPMock():
     def __init__(self, model_path="models/llama-13b-hf_q8_0.gguf", n_gpu_layers=41, n_batch=1024, n_ctx=2048) -> None:
@@ -50,20 +51,38 @@ class Workflow():
             model = LlamaCPPMock()
 
             if mode == "auto":
-                masked_dataset, original_dataset = data_creator.prepare_masked_dataset(datasets['cbr_database'])
+                cbr_dataset = data_creator.prepare_cbr_dataset(datasets['cbr_database'], ['name', 'ingredients'])
+                print(len(cbr_dataset))
+                
+                metadata = CBRDatabase.create_metadatas(list(range(len(cbr_dataset))))
 
-                prompts = prompt_creator.prepare_prompts(masked_dataset, original_dataset, file_name='cbr_database')
+                # db = CBRDatabase(texts=cbr_dataset, db_directory="dataset_chroma_db", metadatas=metadata)
+                # docs = db.similarity_search(query="apple", k=4)
 
-                experiment.run(model, prompts, dataset_name='small_validation_pe')
+                
+                
+                # masked_dataset, original_dataset = data_creator.prepare_masked_dataset(datasets['cbr_database'])
 
-                validation.validate(original_dataset, 'small_validation_pe')
+                # prompts = prompt_creator.prepare_prompts(masked_dataset, original_dataset, file_name='cbr_database')
+
+                # experiment.run(model, prompts, dataset_name='small_validation_pe')
+
+
+
+
+
+
+
+
+
+                # validation.validate(original_dataset, 'small_validation_pe')
                 
 
                 
-            elif mode == "manual":
-                user_inputs = self._get_user_inputs()
-            else:
-                raise ValueError(f'{mode} mode does not exists.')
+            # elif mode == "manual":
+            #     user_inputs = self._get_user_inputs()
+            # else:
+            #     raise ValueError(f'{mode} mode does not exists.')
         
 
 wf = Workflow()

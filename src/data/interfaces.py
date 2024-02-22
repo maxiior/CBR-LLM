@@ -68,3 +68,11 @@ class Dataset(abc.ABC):
         
         print('INFO - dataset has been masked.')
         return df, original_df
+
+    def prepare_cbr_dataset(self, dataset, columns):
+        dataset = dataset[columns]
+
+        columns_data = [dataset[i].to_list() for i in columns]
+        zipped_data = [list(zipped) for zipped in zip(*columns_data)]
+
+        return [" ; ".join([f'{c}: {j}' for c, j in zip(columns, i)]) for i in zipped_data]  
