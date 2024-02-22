@@ -30,13 +30,15 @@ class LlamaCPP(Model):
         for token in self.model.stream(X, echo=False):
             res += token
             if break_word == prev+token:
-                # print(res)#dev
                 res = res.replace(" ; name:", "")
                 res = res.replace(";name:", "")
                 res = res.replace(" ;name:", "")
                 res = res.replace("; name:", "")
                 res = res.replace(" name:", "")
                 res = res.replace("name:", "")
+                break
+            if "\n" in token:
+                res = res.replace("\n", "")
                 break
             prev = token
         

@@ -26,6 +26,14 @@ def str_rep_vdb(df_recipes) -> str:
     comp = [f"name: {e['name']} ; ingredients: {e['ingredients']} ; preparation:" for i, e in df_recipes.iterrows()]
     return comp
 
+def str_rep_vdb_ing(df_recipes) -> str:
+    comp = [f"{e['ingredients']}" for i, e in df_recipes.iterrows()]
+    return comp
+
+def str_rep_vdb_nam(df_recipes) -> str:
+    comp = [f"{e['name']}" for i, e in df_recipes.iterrows()]
+    return comp
+
 def load_all_datasets(datasets_path:str="datasets/") -> tuple:
     additional_cbr_1 = pd.read_csv(f"{datasets_path}_additional_cbr_1.csv")
     additional_cbr_2 = pd.read_csv(f"{datasets_path}_additional_cbr_2.csv")
