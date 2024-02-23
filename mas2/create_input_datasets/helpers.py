@@ -41,7 +41,7 @@ def load_all_datasets(datasets_path:str="datasets/") -> tuple:
     cbr_augmentation = pd.read_csv(f"{datasets_path}_cbr_augmentation.csv")
     cbr_database = pd.read_csv(f"{datasets_path}_cbr_database.csv")
     model_training = pd.read_csv(f"{datasets_path}_model_training.csv")
-    validation = pd.read_csv(f"{datasets_path}_validation_half.csv")
+    validation = pd.read_csv(f"{datasets_path}_validation.csv")
 
     return additional_cbr_1, additional_cbr_2, additional_validation, cbr_augmentation, cbr_database, model_training, validation
 
