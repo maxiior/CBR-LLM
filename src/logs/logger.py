@@ -16,11 +16,7 @@ class Logger():
     def save_json(self, prefix, dataset_name, model_info):
         d = {
             "dataset_name": dataset_name,
-            "model": model_info['model'],
-            "model_path": model_info['model_path'],
-            "n_gpu_layers": model_info['n_gpu_layers'],
-            "n_batch": model_info['n_batch'],
-            "n_ctx": model_info['n_ctx']
+            "model": model_info
         }
 
         with open(f"./logs/{prefix}_sample.json", "w") as outfile: 
