@@ -52,18 +52,14 @@ class Workflow():
 
             if mode == "auto":
                 cbr_dataset = data_creator.prepare_cbr_dataset(datasets['cbr_database'], ['name', 'ingredients'])
-                print(len(cbr_dataset))
                 
                 metadata = CBRDatabase.create_metadatas(list(range(len(cbr_dataset))))
+                casebase = CBRDatabase(texts=cbr_dataset, db_directory="dataset_chroma_db", metadatas=metadata)
 
-                # db = CBRDatabase(texts=cbr_dataset, db_directory="dataset_chroma_db", metadatas=metadata)
                 # docs = db.similarity_search(query="apple", k=4)
 
-                
-                
-                # masked_dataset, original_dataset = data_creator.prepare_masked_dataset(datasets['cbr_database'])
-
-                # prompts = prompt_creator.prepare_prompts(masked_dataset, original_dataset, file_name='cbr_database')
+                masked_dataset, original_dataset = data_creator.prepare_masked_dataset(datasets['cbr_database'])
+                prompts = prompt_creator.prepare_prompts(masked_dataset, original_dataset, file_name='cbr_database', casebase=casebase)
 
                 # experiment.run(model, prompts, dataset_name='small_validation_pe')
 

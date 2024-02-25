@@ -1,0 +1,32 @@
+{
+  "prompt": {
+    "file_name": "prompt_1",
+    "tags": ["<NAME>", "<STEPS>", "<INGREDIENTS>"]
+  },
+  "model": {
+    "type": "gpt",
+    "name": "gpt-3.5-turbo-instruct",
+    "params": {
+      "temperature": 0,
+      "response_format": "json"
+    }
+  },
+  "datasets": {
+    "file_name": "RAW_recipes.csv",
+    "columns_to_extract": [
+      "id",
+      "name",
+      "n_steps",
+      "steps",
+      "ingredients",
+      "n_ingredients"
+    ],
+    "mask_tag": "<MASK>",
+    "proportions": {
+      "train": 0.02,
+      "valid": 0.01,
+      "test": 0.95,
+      "langchain": 0.02
+    }
+  }
+}

@@ -1,9 +1,9 @@
 {
   "experiment": {
-    "name": "small_validation_pe"
+    "name": "colab"
   },
   "prompt": {
-    "number_of_examples": 7,
+    "number_of_examples": 3,
     "random": true
   },
   "model": {

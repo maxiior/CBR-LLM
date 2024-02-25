@@ -33,7 +33,7 @@ class PromptCreator():
 
         return prompt
     
-    def prepare_prompts(self, masked_dataset, original_dataset, file_name, casebase):
+    def prepare_prompts(self, masked_dataset, original_dataset, file_name, casebase=None):
         number_of_examples = self.prompt_configs.number_of_examples
         random = self.prompt_configs.random
 

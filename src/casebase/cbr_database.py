@@ -3,9 +3,6 @@ from langchain_community.vectorstores import Chroma
 from langchain_community.embeddings import GPT4AllEmbeddings
 import os
 
-
-
-
 class CBRDatabase:
     RECIPE_ID_KEY = "recipe_id"
 

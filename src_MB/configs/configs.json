@@ -1,0 +1,6 @@
+{
+  "workflow": {
+    "mode": "auto"
+  },
+  "experiments": ["llama_1.json"]
+}

@@ -1,0 +1,66 @@
+{
+  "prompt": {
+    "name": "prompt_1",
+    "tags": [
+      {
+        "column": "name",
+        "key": "name",
+        "value": "<NAME>",
+        "source": "dataset"
+      },
+      {
+        "column": "ingredients",
+        "key": "ingredients",
+        "value": "<INGREDIENTS>",
+        "source": "dataset"
+      },
+      {
+        "column": "steps",
+        "key": "preparation",
+        "value": "<STEPS>",
+        "source": "dataset"
+      },
+      { "value": "<EXAMPLES>", "source": "langchain" }
+    ],
+    "number_of_most_common": 5,
+    "response_structure": "name: <NAME> ; ingredients: <INGREDIENTS> ; preparation: <STEPS>"
+  },
+  "model": {
+    "name": "gpt",
+    "path": "gpt-3.5-turbo-instruct",
+    "params": {
+      "temperature": 0,
+      "response_format": "json"
+    }
+  },
+  "datasets": {
+    "file_name": "RAW_recipes.csv",
+    "columns_to_extract": [
+      "id",
+      "name",
+      "n_steps",
+      "steps",
+      "ingredients",
+      "n_ingredients"
+    ],
+    "columns_to_mask": ["name", "steps", "ingredients"],
+    "mask_tag": "<MASK>",
+    "proportions": {
+      "cbr_database": 0.2,
+      "cbr_augmentation": 0.2,
+      "additional_cbr_1": 0.1,
+      "additional_cbr_2": 0.1,
+      "validation": 0.04,
+      "additional_validation": 0.06,
+      "model_training": 0.2
+    },
+    "target_files_prefix": ""
+  },
+  "validation": {
+    "bleu_2_threshold": 0.1,
+    "bleu_3_threshold": 0.006,
+    "bleu_4_threshold": 0.001,
+    "meteor_threshold": 0.174,
+    "cosine_similarity_threshold": 0.535
+  }
+}

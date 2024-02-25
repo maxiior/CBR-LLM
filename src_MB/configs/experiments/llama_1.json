@@ -1,0 +1,47 @@
+{
+  "experiment": {
+    "name": "colab"
+  },
+  "prompt": {
+    "number_of_examples": 3,
+    "random": true
+  },
+  "model": {
+    "name": "llama",
+    "path": "models/llama-13b-hf_q8_0.gguf",
+    "n_gpu_layers": 41,
+    "n_batch": 1024,
+    "n_ctx": 2048,
+    "params": {}
+  },
+  "datasets": {
+    "file_name": "RAW_recipes.csv",
+    "columns_to_extract": [
+      "id",
+      "name",
+      "n_steps",
+      "steps",
+      "ingredients",
+      "n_ingredients"
+    ],
+    "columns_to_mask": ["steps"],
+    "mask_tag": "<MASK>",
+    "proportions": {
+      "cbr_database": 0.188,
+      "cbr_augmentation": 0.188,
+      "additional_cbr_1": 0.094,
+      "additional_cbr_2": 0.094,
+      "validation": 0.037,
+      "additional_validation": 0.056,
+      "model_training": 0.188
+    }
+  },
+  "validation": {
+    "bleu_2_threshold": 0.1,
+    "bleu_3_threshold": 0.006,
+    "bleu_4_threshold": 0.001,
+    "meteor_threshold": 0.174,
+    "cosine_similarity_threshold": 0.535
+  },
+  "save_files_prefix": "llama"
+}

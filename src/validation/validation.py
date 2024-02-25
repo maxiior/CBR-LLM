@@ -6,15 +6,17 @@ import pandas as pd
 
 
 class Validation():
-    def __init__(self, experiment_configs) -> None:
-        self.validation_configs = experiment_configs.validation
-        self.prompt_configs = experiment_configs.prompt
+    def __init__(self, experiment_configs=None) -> None:
+        if experiment_configs:
+            self.validation_configs = experiment_configs.validation
+            self.prompt_configs = experiment_configs.prompt
+        self.tokenizer = GPT4AllEmbeddings()
 
     def _cosine_similarity(self, original:str, generated:str) -> float:
-        tokenizer = GPT4AllEmbeddings()
-        X = tokenizer.embed_query(generated)
-        Y = tokenizer.embed_query(original)
-        return round(cosine_similarity([X], [Y]), 6)
+        X = self.tokenizer.embed_query(str(generated))
+        Y = self.tokenizer.embed_query(str(original))
+        score = cosine_similarity([X], [Y])[0][0]
+        return round(score, 6)
 
     def _bleu(self, original:str, generated:str, version:int=4) -> float:
         weights = [0.25, 0.25, 0.25, 0.25]
