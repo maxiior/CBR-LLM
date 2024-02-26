@@ -1,0 +1,7 @@
+{
+    "dataset_name": "cbr_4_8_f_gpt2",
+    "model": {
+        "model": "GPT-2",
+        "max_length": 3
+    }
+}
