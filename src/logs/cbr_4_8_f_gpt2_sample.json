@@ -3,5 +3,6 @@
     "model": {
         "model": "GPT-2",
         "max_length": 3
-    }
+    },
+    "time": 5178.990440607071
 }
