@@ -1,8 +1,0 @@
-{
-    "dataset_name": "cbr_3_6_f_gpt2",
-    "model": {
-        "model": "GPT-2",
-        "max_length": 3
-    },
-    "time": 5041.924267292023
-}

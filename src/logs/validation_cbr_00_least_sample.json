@@ -1,9 +1,0 @@
-{
-    "dataset_name": "validation_cbr_00_least_input.csv",
-    "model": "LLama-13b-hf-q8_0",
-    "model_path": "llama_models/llama-7b-hf.gguf",
-    "n_gpu_layers": 41,
-    "n_batch": 1024,
-    "n_ctx": 2048,
-    "time": 7415.266044378281
-}

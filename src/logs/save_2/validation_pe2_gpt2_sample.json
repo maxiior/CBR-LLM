@@ -1,0 +1,8 @@
+{
+    "dataset_name": "validation_pe2_gpt2",
+    "model": {
+        "model": "GPT-2",
+        "max_length": 3
+    },
+    "time": 4257.609731197357
+}
